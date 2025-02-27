@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mongo5a/models/group_model.dart';
+import 'package:mongo5a/screens/insert_group_screen.dart';
 import 'package:mongo5a/services/mongo_service.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
 
@@ -106,7 +107,26 @@ class _GroupsScreensState extends State<GroupsScreens> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CRUD Mongo de grupos de rock'),
+        title: const Text('Mongo de grupos musicales'),
+        actions: [
+          Padding(
+            padding:const EdgeInsets.only(right: 16.0),
+            child: GestureDetector(
+              onTap:() async{
+                await Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const InsertGroupScreen(),
+                  ),
+                );
+                _fetchGroups();
+              },
+              child: const Icon(
+                Icons.add,
+                size: 26.0,
+                ),
+            ),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: groups.length,
